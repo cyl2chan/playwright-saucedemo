@@ -1,4 +1,4 @@
-from playwright.sync_api import Page
+from playwright.sync_api import Page, expect
 
 class ProductsPage:
     def __init__(self, page: Page):
