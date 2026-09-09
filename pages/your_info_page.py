@@ -6,7 +6,7 @@ class YourInfoPage:
         self.firstname_input = page.get_by_placeholder("First Name")
         self.lastname_input = page.get_by_placeholder("Last Name")
         self.zip_input = page.get_by_placeholder("Zip/Postal Code")
-        self.continue_button = page.locator("continue")
+        self.continue_button = page.locator("#continue")
 
     def enter_first_name(self, firstname: str):
         self.firstname_input.fill(firstname)
@@ -24,4 +24,4 @@ class YourInfoPage:
         self.enter_first_name("Leon")
         self.enter_last_name("Chan")
         self.enter_zip("A1B C2D")
-        self.click_continue_button.click()
+        self.continue_button.click()

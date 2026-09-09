@@ -18,7 +18,6 @@ class LoginPage:
         self.login_button.click()
 
     def login(self):
-        page.goto("http://www.saucedemo.com")
         self.enter_username("standard_user")
         self.enter_password("secret_sauce")
         self.click_login()
