@@ -24,11 +24,11 @@ def test_login(page: Page, username, password) -> None:
     
     page.goto("http://www.saucedemo.com")
     login_page.enter_username(username)
-    page.wait_for_timeout(2000)
+    #page.wait_for_timeout(2000)
     login_page.enter_password(password)
-    page.wait_for_timeout(2000)
+    #page.wait_for_timeout(2000)
     login_page.click_login()
 
-    products_page.display_swag_labs()
-    page.wait_for_timeout(2000)
+    products_page.display_swag_labs(page)
+    #page.wait_for_timeout(2000)
 
