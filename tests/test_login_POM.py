@@ -4,16 +4,16 @@ from pages.login_page import LoginPage
 from pages.products_page import ProductsPage
 import pytest
 
-def get_csv_data() -> list:
+def get_login_data() -> list:
     import csv
     data = []
-    with open("./test_data/data.csv", newline="", encoding="utf-8-sig") as csvfile:
+    with open("./test_data/login_data.csv", newline="", encoding="utf-8-sig") as csvfile:
         reader = csv.reader(csvfile)
         for row in reader:
             data.append(row)
     return data
 
-@pytest.mark.parametrize("username, password", get_csv_data())
+@pytest.mark.parametrize("username, password", get_login_data())
 
 def test_login(page: Page, username, password) -> None:
     print(repr(username))
@@ -29,6 +29,6 @@ def test_login(page: Page, username, password) -> None:
     #page.wait_for_timeout(2000)
     login_page.click_login()
 
-    products_page.display_swag_labs(page)
+    products_page.display_inventory(page)
     #page.wait_for_timeout(2000)
 

@@ -5,10 +5,13 @@ from pages.cart_page import CartPage
 from pages.your_info_page import YourInfoPage
 from pages.checkout_overview_page import CheckoutOverviewPage
 from pages.checkout_complete_page import CheckoutCompletePage
+import pytest
 
-def test_checkout(page: Page) -> None:
+@pytest.mark.parametrize("product_name", ProductsPage.get_inventory_data())
+
+def test_checkout(page: Page, product_name) -> None:
     login_page = LoginPage(page)
-    products_page = ProductsPage(page)
+    products_page = ProductsPage(page, product_name)
     cart_page = CartPage(page)
     your_info_page = YourInfoPage(page)
     overview_page = CheckoutOverviewPage(page)
@@ -17,7 +20,7 @@ def test_checkout(page: Page) -> None:
     page.goto("http://www.saucedemo.com")
     login_page.login()
 
-    products_page.click_first_add_to_cart()
+    products_page.click_product_add_to_cart(product_name)
     products_page.click_cart()
     cart_page.click_checkout()
     your_info_page.complete_your_info()
