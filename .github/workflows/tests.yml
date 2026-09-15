@@ -1,4 +1,4 @@
-#Part 4
+#Part 3
 name: CI
 
 on: [push]
@@ -8,34 +8,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          playwright install --with-deps
+
+      #Part 4
       - name: Run tests
         run: pytest ./tests/test_login_POM.py
-
-#     steps:
-
-
-#Part 3
-# name: CI
-
-# on: [push]
-
-# jobs:
-#   test:
-#     runs-on: ubuntu-latest
-
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v4
-
-#       - name: Set up Python
-#         uses: actions/setup-python@v5
-#         with:
-#           python-version: "3.11"
-
-#       - name: Install dependencies
-#         run: |
-#           pip install -r requirements.txt
-#           playwright install --with-deps
+      
 
 
 #Part 2
