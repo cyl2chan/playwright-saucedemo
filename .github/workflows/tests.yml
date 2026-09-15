@@ -9,7 +9,7 @@ jobs:
 
     steps:
       - name: Run tests
-        run: pytest test_login_POM.py
+        run: pytest ./tests/test_login_POM.py
 
 #     steps:
 
