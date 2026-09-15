@@ -1,22 +1,25 @@
 #Part 3
+name: CI
+
 on: [push]
 
 jobs:
-    test:
-        runs-on: ububntu-latest
-        steps:
-            - name: Checkout code
-                uses: actions/checkout@v4
+  test:
+    runs-on: ubuntu-latest
 
-            - name: set up Python
-                uses: actions/setup-python@v5
-                with:
-                    python-version: "3.11"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-            - name: Install dependencies
-                run: |
-                    pip install -r requirements.txt
-                    playwright install --with-deps
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          playwright install --with-deps
 
 
 #Part 2
