@@ -27,7 +27,9 @@ jobs:
 
       #Part 4
       - name: Run tests
-        run: pytest ./tests/test_checkout_POM.py
+        run: |
+          pytest ./tests/test_login_POM.py
+          pytest ./tests/test_checkout_POM.py
 
 
 
