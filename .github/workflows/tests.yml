@@ -23,7 +23,7 @@ jobs:
 
       #Part 4
       - name: Run tests
-        run: pytest ./tests/test_login_POM.py
+        run: pytest test_login_POM.py
       
 
 
