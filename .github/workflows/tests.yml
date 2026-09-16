@@ -1,12 +1,11 @@
 #Part 3
 name: CI
-
+headless: true
 on: [push]
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    headless: true
 
     steps:
       - name: Checkout code
