@@ -1,6 +1,10 @@
-#Part 3
+#Part 3, 4, 5
 name: CI
-on: [push]
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
   test:
