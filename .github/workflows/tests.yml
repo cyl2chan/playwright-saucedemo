@@ -1,6 +1,5 @@
 #Part 3
 name: CI
-headless: true
 on: [push]
 
 jobs:
