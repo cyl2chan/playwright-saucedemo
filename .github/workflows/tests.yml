@@ -6,6 +6,7 @@ on: [push]
 jobs:
   test:
     runs-on: ubuntu-latest
+    headless: true
 
     steps:
       - name: Checkout code
@@ -23,7 +24,7 @@ jobs:
 
       #Part 4
       - name: Run tests
-        run: pytest test_login_POM.py
+        run: pytest ./tests/test_login_POM.py
       
 
 
