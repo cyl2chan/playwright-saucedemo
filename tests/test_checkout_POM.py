@@ -12,7 +12,7 @@ import pytest
 def test_checkout(page: Page, product_name) -> None:
     login_page = LoginPage(page)
     products_page = ProductsPage(page, product_name)
-    cart_page = CartPage(page)
+    cart_page = CartPage(page, product_name)
     your_info_page = YourInfoPage(page)
     overview_page = CheckoutOverviewPage(page)
     checkout_complete_page = CheckoutCompletePage(page)
@@ -20,8 +20,11 @@ def test_checkout(page: Page, product_name) -> None:
     page.goto("http://www.saucedemo.com")
     login_page.login()
 
-    products_page.click_product_add_to_cart(product_name)
+    products_page.click_product_add_to_cart(product_name) #select different products
+    #product_page.click_first_add_to_cart()
     products_page.click_cart()
+    cart_page.check_product_name(product_name)
+    #cart_page.check_price()
     cart_page.click_checkout()
     your_info_page.complete_your_info()
     overview_page.click_finish()
