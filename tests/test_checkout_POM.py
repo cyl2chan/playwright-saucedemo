@@ -10,6 +10,8 @@ import pytest
 @pytest.mark.parametrize("product_name", ProductsPage.get_inventory_data())
 
 def test_checkout(page: Page, product_name) -> None:
+    #page.goto("http://www.saucedemo.com")
+    
     login_page = LoginPage(page)
     products_page = ProductsPage(page, product_name)
     cart_page = CartPage(page, product_name)
