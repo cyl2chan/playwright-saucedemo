@@ -31,6 +31,9 @@ jobs:
           pytest ./tests/test_login_POM.py
           pytest ./tests/test_checkout_POM.py
 
+      #Add artifects
+
+
 
 
 #Part 3, 4, 5
