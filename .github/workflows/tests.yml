@@ -29,7 +29,7 @@ jobs:
       - name: Run tests
         run: |
           pytest ./tests/test_login_POM.py
-          pytest ./tests/test_checkout_POM.py
+          pytest ./tests/test_checkout_POM.py --tracing=retain-on-failure
 
       #Add artifects
       - name: Upload Playwright artifacts
