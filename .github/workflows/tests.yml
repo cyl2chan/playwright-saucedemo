@@ -32,11 +32,11 @@ jobs:
           pytest ./tests/test_checkout_POM.py
 
       #Add artifects
-      - name: Upload Playwright artifects
-        uses: actions/uplaod-artifect@v4
+      - name: Upload Playwright artifacts
+        uses: actions/uplaod-artifact@v4
         if: always()
         with: 
-          name: playwright-artifects
+          name: playwright-artifacts
           path: test-results/
           retention-days: 30
 
