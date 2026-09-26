@@ -27,10 +27,20 @@ jobs:
 
       #Part 4
       - name: Run tests
-        run: |
+        # for uploading artifacts only when test fail
+        # run: |
+        #   pytest ./tests/test_login_POM.py --tracing=retain-on-failure
+        #  pytest ./tests/test_checkout_POM.py --tracing=retain-on-failure
+        
+        # for uploading artifacts regardless of test fail
+        run: >
           pytest ./tests/test_login_POM.py
           pytest ./tests/test_checkout_POM.py
-        #  pytest ./tests/test_checkout_POM.py --tracing=retain-on-failure
+          --tracing=on
+          --screenshot=on
+          --video=on
+          --output=test-result
+
 
       #Add artifects
       - name: Upload Playwright artifacts
