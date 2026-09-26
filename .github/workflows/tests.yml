@@ -29,13 +29,14 @@ jobs:
       - name: Run tests
         # for uploading artifacts only when test fail
         # run: |
-        #   pytest ./tests/test_login_POM.py --tracing=retain-on-failure
+        #  pytest ./tests/test_login_POM.py --tracing=retain-on-failure
         #  pytest ./tests/test_checkout_POM.py --tracing=retain-on-failure
         
         # for uploading artifacts regardless of test fail
         run: >
-          pytest ./tests/test_login_POM.py
-          pytest ./tests/test_checkout_POM.py
+          pytest
+          ./tests/test_login_POM.py
+          ./tests/test_checkout_POM.py
           --tracing=on
           --screenshot=on
           --video=on
