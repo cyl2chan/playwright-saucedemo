@@ -9,7 +9,7 @@ class CartPage:
         self.page = page
         self.cart_item = page.locator(".cart_list")
         self.product_name = self.cart_item.locator(".inventory_item_name")
-        self.checkout_button = page.get_by_role("button", name="ABC")
+        self.checkout_button = page.get_by_role("button", name="Checkout")
 
     def check_product_name(self, product_name):
         #print("name in test:", self.product_name.all_text_contents())
