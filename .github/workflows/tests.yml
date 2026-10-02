@@ -20,6 +20,13 @@ jobs:
         with:
           python-version: "3.11"
 
+      #Add caching
+      - name: Cache
+        uses: actions/cache@v5.0.5
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
@@ -53,11 +60,11 @@ jobs:
           retention-days: 30
 
       #Add caching
-      - name: Cache
-        uses: actions/cache@v5.0.5
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+      # - name: Cache
+      #   uses: actions/cache@v5.0.5
+      #   with:
+      #     path: ~/.cache/pip
+      #     key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
 
 
 #Part 3, 4, 5
