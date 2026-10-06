@@ -1,5 +1,5 @@
 #for pytest complete checkout
-name: CI
+name: Build and Test Swaglabs
 #on: [push]
 on:
   push:
