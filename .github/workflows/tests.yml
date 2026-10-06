@@ -14,41 +14,55 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      
+      - name: Build Docker Image
+        run: docker build -t playwright-tests .
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Run tests in container
+        run: docker run --rm -v ${{ github.workspace }}/reports:/app/reports playwright-tests
+
+      - name: Upload test report
+        if: always()
+        uses: actions/upload-artifact@v4
         with:
-          python-version: "3.11"
+          name: test-report
+          path: reports/      
 
-      #Cache pip
-      - name: Cache pip
-        uses: actions/cache@v5.0.5
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
 
-      - name: Install dependencies
-        run:
-          pip install -r requirements.txt
-          #playwright install --with-deps
+      # - name: Set up Python
+      #   uses: actions/setup-python@v5
+      #   with:
+      #     python-version: "3.11"
 
-      #Cache PLaywright browsers
-      - name: Cache Playwright browsers
-        id: playwright-cache
-        uses: actions/cache@v5
-        with: 
-          path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ hashFiles('requirements.txt') }}
+      # #Cache pip
+      # - name: Cache pip
+      #   uses: actions/cache@v5.0.5
+      #   with:
+      #     path: ~/.cache/pip
+      #     key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
 
-      - name: Install Playwright browsers
-        run: 
-          playwright install --with-deps
+      # - name: Install dependencies
+      #   run:
+      #     pip install -r requirements.txt
+      #     #playwright install --with-deps
 
-      - name: Run tests
-        # for uploading artifacts only when test fail
-        run: |
-         pytest ./tests/test_login_POM.py --tracing=retain-on-failure
-         pytest ./tests/test_checkout_POM.py --tracing=retain-on-failure
+      # #Cache PLaywright browsers
+      # - name: Cache Playwright browsers
+      #   id: playwright-cache
+      #   uses: actions/cache@v5
+      #   with: 
+      #     path: ~/.cache/ms-playwright
+      #     key: ${{ runner.os }}-playwright-${{ hashFiles('requirements.txt') }}
+
+      # - name: Install Playwright browsers
+      #   run: 
+      #     playwright install --with-deps
+
+      # - name: Run tests
+      #   # for uploading artifacts only when test fail
+      #   run: |
+      #    pytest ./tests/test_login_POM.py --tracing=retain-on-failure
+      #    pytest ./tests/test_checkout_POM.py --tracing=retain-on-failure
         
         # for uploading artifacts regardless of test fail
         # run: >
