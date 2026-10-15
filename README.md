@@ -54,12 +54,13 @@ reports/                      HTML report output
 ## Local Setup
 Prerequisites: Git, Python with venv support, and internet access to SauceDemo. The configured browser is Chromium.
 ```bash
-git clone https://github.com/cyl2chan/playwright-saucedemo.git
-cd playwright-saucedemo
-git switch page-object-model
+  git clone https://github.com/cyl2chan/playwright-saucedemo.git
+  cd playwright-saucedemo
+  git switch page-object-model
 ```
 
 Activate the virtual environment:
+
 **Windows PowerShell**
 ```bash
   .\.venv\Scripts\Activate.ps1
