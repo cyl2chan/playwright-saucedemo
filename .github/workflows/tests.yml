@@ -1,0 +1,132 @@
+#for pytest complete checkout
+name: Build and Test Swaglabs
+#on: [push]
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Build Docker Image
+        run: docker build -t playwright-tests .
+
+      - name: Run tests in container
+        run: docker run --rm -v ${{ github.workspace }}/reports:/app/reports playwright-tests
+
+      - name: Upload test report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: reports/      
+
+
+      # - name: Set up Python
+      #   uses: actions/setup-python@v5
+      #   with:
+      #     python-version: "3.11"
+
+      # #Cache pip
+      # - name: Cache pip
+      #   uses: actions/cache@v5.0.5
+      #   with:
+      #     path: ~/.cache/pip
+      #     key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+
+      # - name: Install dependencies
+      #   run:
+      #     pip install -r requirements.txt
+      #     #playwright install --with-deps
+
+      # #Cache PLaywright browsers
+      # - name: Cache Playwright browsers
+      #   id: playwright-cache
+      #   uses: actions/cache@v5
+      #   with: 
+      #     path: ~/.cache/ms-playwright
+      #     key: ${{ runner.os }}-playwright-${{ hashFiles('requirements.txt') }}
+
+      # - name: Install Playwright browsers
+      #   run: 
+      #     playwright install --with-deps
+
+      # - name: Run tests
+      #   # for uploading artifacts only when test fail
+      #   run: |
+      #    pytest ./tests/test_login_POM.py --tracing=retain-on-failure
+      #    pytest ./tests/test_checkout_POM.py --tracing=retain-on-failure
+        
+        # for uploading artifacts regardless of test fail
+        # run: >
+        #   pytest
+        #   ./tests/test_login_POM.py
+        #   ./tests/test_checkout_POM.py
+        #   --tracing=on
+        #   --screenshot=on
+        #   --video=on
+        #   --output=test-result
+
+
+      #Add artifects
+      - name: Upload Playwright artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with: 
+          name: playwright-artifacts
+          path: test-results/
+          retention-days: 30
+
+
+#Part 3, 4, 5
+#for pytest login
+# name: CI
+# # on: [push]
+# on:
+#   push:
+#     branches: [main]
+#   pull_request:
+#     branches: [main]
+
+# jobs:
+#   test:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
+
+#       - name: Set up Python
+#         uses: actions/setup-python@v5
+#         with:
+#           python-version: "3.11"
+
+#       - name: Install dependencies
+#         run: |
+#           pip install -r requirements.txt
+#           playwright install --with-deps
+
+#       #Part 4
+#       - name: Run tests
+#         run: pytest ./tests/test_login_POM.py
+      
+
+
+#Part 2
+# name: CI
+
+# on: [push]
+
+# jobs:
+#   say-hello:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Say hello
+#         run: echo "hello CI"

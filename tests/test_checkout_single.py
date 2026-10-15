@@ -18,3 +18,5 @@ def test_checkout_single(page: Page) -> None:
     page.locator("#continue").click()
     page.get_by_role("button", name="Finish").click()
     expect(page.get_by_text("Thank you for your order!")).to_be_visible()
+
+    
